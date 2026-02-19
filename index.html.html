@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hitarth Barot — Business Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --charcoal: #1a2740;
+    --surface: #1e2f47;
+    --surface2: #243552;
+    --teal: #2ec4b6;
+    --teal-light: #3dd9c4;
+    --teal-dim: rgba(46,196,182,0.12);
+    --white: #f0f4f8;
+    --white-soft: #c8d6e5;
+    --muted: #7a93ad;
+    --border: rgba(46,196,182,0.18);
+    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+    --radius: 12px;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background var(--transition);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo span { color: var(--teal); }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--white-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color var(--transition);
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0; height: 2px;
+    background: var(--teal);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform var(--transition);
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white);
+    transition: var(--transition);
+    border-radius: 2px;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 68px; left: 0; right: 0; z-index: 99;
+    background: var(--charcoal);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 5%;
+    flex-direction: column; gap: 1rem;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    color: var(--white-soft);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: color var(--transition);
+  }
+
+  .mobile-menu a:hover { color: var(--teal); }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 5%; }
+  .section-label {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-line {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    margin-bottom: 3rem;
+    border-radius: 2px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 70% 40%, rgba(46,196,182,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(46,196,182,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* grid dots */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(46,196,182,0.12) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; max-width: 760px; }
+
+  .hero-greeting {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--teal-dim);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.85rem; color: var(--teal);
+    font-weight: 500; letter-spacing: 0.05em;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-greeting i { font-size: 0.7rem; }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero-role {
+    font-size: 1.05rem; color: var(--muted);
+    font-weight: 400; margin-bottom: 1.6rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--white-soft);
+    max-width: 600px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.78rem 1.8rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem; font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--navy);
+    border: 2px solid var(--teal);
+  }
+
+  .btn-primary:hover {
+    background: var(--teal-light);
+    border-color: var(--teal-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(46,196,182,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    transform: translateY(-2px);
+  }
+
+  .hero-socials {
+    display: flex; gap: 1rem; margin-top: 3rem;
+  }
+
+  .social-link {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition);
+  }
+
+  .social-link:hover {
+    color: var(--teal);
+    border-color: var(--teal);
+    background: var(--teal-dim);
+    transform: translateY(-2px);
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--charcoal); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--white-soft);
+    font-size: 1.02rem;
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+    line-height: 1.85;
+  }
+
+  .about-details {
+    display: flex; flex-direction: column; gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .detail-item {
+    display: flex; align-items: center; gap: 0.9rem;
+    color: var(--white-soft); font-size: 0.9rem;
+  }
+
+  .detail-item i {
+    color: var(--teal);
+    width: 18px; text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .detail-item a {
+    color: var(--white-soft);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .detail-item a:hover { color: var(--teal); }
+
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .stat-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(46,196,182,0.1);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--navy); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 1.8rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(46,196,182,0.1);
+  }
+
+  .skill-icon {
+    width: 44px; height: 44px;
+    background: var(--teal-dim);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal);
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-card h3 {
+    font-size: 1rem; font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 0.45rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: var(--teal);
+    background: var(--teal-dim);
+    border: 1px solid rgba(46,196,182,0.2);
+    border-radius: 100px;
+    padding: 0.25rem 0.7rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--charcoal); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.8rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: var(--transition);
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform var(--transition);
+  }
+
+  .project-card:hover::after { transform: scaleX(1); }
+
+  .project-card:hover {
+    border-color: var(--teal);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(46,196,182,0.1);
+  }
+
+  .project-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-icon {
+    width: 42px; height: 42px;
+    background: var(--teal-dim);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal); font-size: 1.05rem;
+  }
+
+  .project-link {
+    color: var(--muted);
+    font-size: 0.95rem;
+    transition: color var(--transition);
+  }
+
+  .project-link:hover { color: var(--teal); }
+
+  .project-card h3 {
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .project-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 1.4rem;
+  }
+
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+
+  .project-tag {
+    font-size: 0.73rem;
+    color: var(--white-soft);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    font-weight: 500;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--navy); }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: var(--transition);
+  }
+
+  .exp-card:hover {
+    border-color: var(--teal);
+    box-shadow: 0 12px 32px rgba(46,196,182,0.08);
+  }
+
+  .exp-header {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .exp-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: var(--teal-dim);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal); font-size: 1.05rem;
+  }
+
+  .exp-meta { flex: 1; }
+
+  .exp-meta h3 {
+    font-size: 1rem; font-weight: 600;
+    color: var(--white); margin-bottom: 0.2rem;
+  }
+
+  .exp-meta span {
+    font-size: 0.82rem; color: var(--teal);
+    font-weight: 500;
+  }
+
+  .exp-card ul {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+
+  .exp-card li {
+    font-size: 0.87rem; color: var(--white-soft);
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-card li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--teal); font-size: 0.7rem;
+    top: 0.2em;
+  }
+
+  /* accomplishments */
+  .accomplishments {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  .accomplishment {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.6rem;
+    transition: var(--transition);
+  }
+
+  .accomplishment:hover {
+    border-color: var(--teal);
+    transform: translateX(4px);
+  }
+
+  .acc-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: var(--teal-dim);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal); font-size: 0.9rem;
+  }
+
+  .accomplishment p {
+    font-size: 0.92rem; color: var(--white-soft);
+    line-height: 1.65;
+    margin-top: 0.05rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--charcoal); }
+
+  .contact-inner {
+    max-width: 680px; margin: 0 auto; text-align: center;
+  }
+
+  .contact-inner .section-label,
+  .contact-inner .section-title { text-align: center; }
+
+  .contact-inner .section-line { margin: 0 auto 2.5rem; }
+
+  .contact-inner p {
+    color: var(--white-soft);
+    font-size: 1.05rem; margin-bottom: 2.5rem;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .contact-links {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.75rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--white-soft);
+    text-decoration: none;
+    font-size: 0.88rem; font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .contact-link i { color: var(--teal); }
+
+  .contact-link:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    background: var(--teal-dim);
+    transform: translateY(-2px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 2rem 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  footer p { font-size: 0.83rem; color: var(--muted); }
+  footer span { color: var(--teal); }
+
+  /* ── FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 80px 5%; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 420px) {
+    .about-stats { grid-template-columns: 1fr; }
+    h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Hitarth<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#skills" class="mobile-link">Skills</a>
+  <a href="#projects" class="mobile-link">Projects</a>
+  <a href="#experience" class="mobile-link">Experience</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-greeting"><i class="fa-solid fa-circle fa-beat" style="color:var(--teal)"></i> Available for opportunities</div>
+    <h1>Hitarth<br><em>Barot</em></h1>
+    <p class="hero-role">Business Analyst &nbsp;·&nbsp; Canada (Open to Remote / Relocation)</p>
+    <p class="hero-tagline">I translate business needs into clear requirements, data models, and user-centered solutions.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+      <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-paper-plane"></i> Get in Touch</a>
+    </div>
+    <div class="hero-socials">
+      <a href="https://linkedin.com/in/hitarth-barot-5911292b7" target="_blank" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/hitarthbarot" target="_blank" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="mailto:hitarth.barot@gmail.com" class="social-link" title="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="section-line"></div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <h2 class="section-title">Bridging Business<br>& Technology</h2>
+      <p>IT student focused on business analysis with hands-on experience in requirements elicitation, process modeling, data design, and UI/UX wireframing. I bridge the gap between business goals and technical implementation.</p>
+      <p>My approach centers on understanding the "why" behind every system — gathering the right requirements, mapping the right processes, and designing solutions people actually want to use.</p>
+      <div class="about-details">
+        <div class="detail-item"><i class="fa-solid fa-location-dot"></i> Canada (open to relocation/remote)</div>
+        <div class="detail-item"><i class="fa-solid fa-envelope"></i> <a href="mailto:hitarth.barot@gmail.com">hitarth.barot@gmail.com</a></div>
+        <div class="detail-item"><i class="fa-solid fa-phone"></i> <a href="tel:+12899701206">+1 (289) 970-1206</a></div>
+        <div class="detail-item"><i class="fa-brands fa-linkedin-in"></i> <a href="https://linkedin.com/in/hitarth-barot-5911292b7" target="_blank">linkedin.com/in/hitarth-barot-5911292b7</a></div>
+        <div class="detail-item"><i class="fa-brands fa-github"></i> <a href="https://github.com/hitarthbarot" target="_blank">github.com/hitarthbarot</a></div>
+      </div>
+    </div>
+    <div class="about-stats fade-in">
+      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">BA Projects</div></div>
+      <div class="stat-card"><div class="stat-num">2+</div><div class="stat-label">Years Study</div></div>
+      <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">BA Artifacts</div></div>
+      <div class="stat-card"><div class="stat-num">3NF</div><div class="stat-label">DB Design</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Expertise</div>
+  <h2 class="section-title">Skills & Toolset</h2>
+  <div class="section-line"></div>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <h3>Business Analysis</h3>
+      <div class="skill-tags">
+        <span class="tag">FRD</span>
+        <span class="tag">User Stories</span>
+        <span class="tag">Acceptance Criteria</span>
+        <span class="tag">Elicitation</span>
+        <span class="tag">Interviews</span>
+        <span class="tag">Workshops</span>
+        <span class="tag">Use Cases</span>
+        <span class="tag">Gap Analysis</span>
+        <span class="tag">Traceability</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon"><i class="fa-solid fa-sitemap"></i></div>
+      <h3>Process &amp; Data</h3>
+      <div class="skill-tags">
+        <span class="tag">BPMN</span>
+        <span class="tag">Flowcharts</span>
+        <span class="tag">SIPOC</span>
+        <span class="tag">ERD</span>
+        <span class="tag">Normalization 1NF–3NF</span>
+        <span class="tag">Relational Design</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+      <h3>UX Support</h3>
+      <div class="skill-tags">
+        <span class="tag">Personas</span>
+        <span class="tag">Task Flows</span>
+        <span class="tag">User Flows</span>
+        <span class="tag">Wireframes</span>
+        <span class="tag">Balsamiq</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon"><i class="fa-solid fa-gears"></i></div>
+      <h3>Tools &amp; Methods</h3>
+      <div class="skill-tags">
+        <span class="tag">Agile</span>
+        <span class="tag">Waterfall</span>
+        <span class="tag">ADKAR</span>
+        <span class="tag">BABOK</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Work</div>
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="section-line"></div>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon"><i class="fa-solid fa-utensils"></i></div>
+      </div>
+      <h3>NextBite — Food Delivery Web App</h3>
+      <p>Defined end-to-end ordering journey, user stories, entity relationships, and core UX screens for a food delivery prototype. Produced FRD, ERD, and wireframes covering the full customer and restaurant-side workflow.</p>
+      <div class="project-tags">
+        <span class="project-tag">Next.js</span>
+        <span class="project-tag">TypeScript</span>
+        <span class="project-tag">Firebase</span>
+        <span class="project-tag">GitHub</span>
+        <span class="project-tag">FRD</span>
+        <span class="project-tag">ERD</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon"><i class="fa-solid fa-paw"></i></div>
+      </div>
+      <h3>Doggy Day Care Website</h3>
+      <p>Designed full UX package including sitemap, task flows, user flows, and web wireframes. Delivered instructor-ready mockups aligned to usability standards using a structured Waterfall approach.</p>
+      <div class="project-tags">
+        <span class="project-tag">Balsamiq</span>
+        <span class="project-tag">UX Design</span>
+        <span class="project-tag">Waterfall</span>
+        <span class="project-tag">Task Flows</span>
+        <span class="project-tag">Wireframes</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon"><i class="fa-solid fa-book-open"></i></div>
+      </div>
+      <h3>Online Library System</h3>
+      <p>Developed use cases, user stories, and a requirements traceability matrix for a library management system covering search, borrow, and return workflows under an Agile delivery model.</p>
+      <div class="project-tags">
+        <span class="project-tag">Agile</span>
+        <span class="project-tag">User Stories</span>
+        <span class="project-tag">RTM</span>
+        <span class="project-tag">Use Cases</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-icon"><i class="fa-solid fa-database"></i></div>
+      </div>
+      <h3>ABC Publisher Database Design</h3>
+      <p>Identified anomalies, defined functional dependencies, and produced a normalized schema to 3NF with a full ERD including primary and foreign key relationships for a publishing company database.</p>
+      <div class="project-tags">
+        <span class="project-tag">SQL</span>
+        <span class="project-tag">ERD</span>
+        <span class="project-tag">Normalization</span>
+        <span class="project-tag">3NF</span>
+        <span class="project-tag">PK/FK</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Background</div>
+  <h2 class="section-title">Education &amp; Learning</h2>
+  <div class="section-line"></div>
+  <div class="exp-grid">
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div class="exp-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="exp-meta">
+          <h3>NBCC — IT Business Analysis Program</h3>
+          <span>Formal Education</span>
+        </div>
+      </div>
+      <ul>
+        <li>Business Analysis fundamentals and BABOK framework</li>
+        <li>Data Modeling: ERDs, normalization, relational design</li>
+        <li>Database Management and SQL</li>
+        <li>UI Design principles and user-centered design</li>
+        <li>Change Management and ADKAR model</li>
+      </ul>
+    </div>
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div class="exp-icon"><i class="fa-solid fa-laptop-code"></i></div>
+        <div class="exp-meta">
+          <h3>Self-Directed Learning</h3>
+          <span>Continuous Development</span>
+        </div>
+      </div>
+      <ul>
+        <li>BABOK terminology and knowledge areas</li>
+        <li>Diagramming: BPMN, flowcharts, ERDs</li>
+        <li>Wireframing for web and mobile-first contexts</li>
+        <li>Agile practices, sprint planning, and retrospectives</li>
+        <li>Modern web stack: Next.js, TypeScript, Firebase</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:1rem;">Key Accomplishments</div>
+  <div class="accomplishments" style="margin-top:1.2rem;">
+    <div class="accomplishment fade-in">
+      <div class="acc-icon"><i class="fa-solid fa-award"></i></div>
+      <p>Delivered multiple instructor-evaluated BA artifacts — ERDs, schemas, user flows, and wireframes — all aligned to defined rubric requirements.</p>
+    </div>
+    <div class="accomplishment fade-in">
+      <div class="acc-icon"><i class="fa-solid fa-rocket"></i></div>
+      <p>Built end-to-end requirements and UX packages that reduced rework during prototype iterations by ensuring alignment before development begins.</p>
+    </div>
+    <div class="accomplishment fade-in">
+      <div class="acc-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+      <p>Created consistent documentation templates — scope statements, assumptions registers, requirements tables — improving traceability from business needs to screens.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's Work Together</h2>
+    <div class="section-line"></div>
+    <p>Whether you need BA support, a requirements deep-dive, or someone to bridge your business and dev teams — I'd love to connect. Open to full-time roles, co-op placements, and freelance engagements.</p>
+    <div class="contact-links">
+      <a href="mailto:hitarth.barot@gmail.com" class="contact-link"><i class="fa-solid fa-envelope"></i> hitarth.barot@gmail.com</a>
+      <a href="tel:+12899701206" class="contact-link"><i class="fa-solid fa-phone"></i> +1 (289) 970-1206</a>
+      <a href="https://linkedin.com/in/hitarth-barot-5911292b7" target="_blank" class="contact-link"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+      <a href="https://github.com/hitarthbarot" target="_blank" class="contact-link"><i class="fa-brands fa-github"></i> GitHub</a>
+    </div>
+    <a href="mailto:hitarth.barot@gmail.com" class="btn btn-primary" style="display:inline-flex;margin:0 auto;">
+      <i class="fa-solid fa-paper-plane"></i> Send a Message
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 <span>Hitarth Barot</span>. All rights reserved.</p>
+  <p>Built with intention &amp; care.</p>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80 * (entry.target.dataset.delay || 0));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.dataset.delay = i % 4;
+    observer.observe(el);
+  });
+
+  // Nav background on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar.style.background = 'rgba(13,27,42,0.97)';
+    } else {
+      navbar.style.background = 'rgba(13,27,42,0.85)';
+    }
+  });
+</script>
+</body>
+</html>
